@@ -1,0 +1,12 @@
+Note: Significant figures due to 4 significant figures in the Gravitational Constant
+
+A volume is created as a volume of space with a given mass and uniform density.
+A volume is filled* with user-defined diameter particles* that fill up a volume starting from the center* of a volume.
+
+*FILLED: The process of filling a volume with particles* starts with a single particle at the center*.
+Each particle fills up the volume in a square grid pattern where incrementation on the horizontal or vertical axis is uniform.
+The boudary of each particle should never exit the boundary of the volume that of which is being filled.
+
+*PARTICLES: a point mass with mass equal to the total mass of the occupied volume divided by the number of particles within that volume.
+
+*CENTER: centroid calculated by arithmetic mean of all vertices where centroid (x, y) = ((x_1 + x_2 + x_3 + ... + x_k) / k, (y_1 + y_2 + y_3 + ... + y_k) / k).

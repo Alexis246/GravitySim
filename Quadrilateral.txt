@@ -1,0 +1,29 @@
+public void createParticles() {
+        particles = new ArrayList<Particle>();
+        BigDecimal maxDX = width.subtract(particleDiameter).divide(new BigDecimal(2));
+        BigDecimal maxDY = height.subtract(particleDiameter).divide(new BigDecimal(2));
+
+        for (BigDecimal dX = maxDX.subtract(maxDX.remainder(particleDiameter)).negate(); dX.compareTo(maxDX) <= 0; dX = dX.add(particleDiameter)) {
+            for (BigDecimal dY = maxDY.subtract(maxDY.remainder(particleDiameter)).negate(); dY.compareTo(maxDY) <= 0; dY = dY.add(particleDiameter)) {
+
+                //Check if each particle is completely inside of quadrilateral with a vertex at the edge of each axis of the ellipse
+                BigDecimal h = dX.abs();
+                BigDecimal k = dY.abs();
+                BigDecimal m = halfHeight.divide(halfWidth, MATH_CONTEXT).negate();
+
+                //checks discriminant for number of intersections between particle edge and quadrilater edges
+                BigDecimal term1 = k.multiply(m).add(h).pow(2);
+                BigDecimal term2 = m.pow(2).add(BigDecimal.ONE)
+                        .multiply(h.pow(2).add(k.pow(2)).subtract(particleRadius.pow(2)));
+                BigDecimal discriminant = new BigDecimal(4).multiply(term1.subtract(term2));
+
+                //checks if center of circle is outside of quadrilateral if signum is 0 or -1
+                if (/*discriminant.signum() > 0 || */ h.divide(halfWidth, MATH_CONTEXT).pow(2).add(k.divide(halfHeight, MATH_CONTEXT).pow(2))
+                        .compareTo(BigDecimal.ONE) > 0) {
+                    continue;
+                }
+
+                particles.add(new Particle(x.add(dX), y.add(dY), BigDecimal.ZERO));
+            }
+        }
+}
